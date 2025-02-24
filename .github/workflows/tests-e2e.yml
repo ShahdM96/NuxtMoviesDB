@@ -14,7 +14,10 @@ jobs:
 
     services:
       app:
-        image: your-app-image:latest
+        image: my-app:latest # Change this name if needed
+        build:
+          context: .
+          dockerfile: Dockerfile
         ports:
           - 3000:3000 # Adjust based on your app's port
         options: --health-cmd="curl --fail http://localhost:3000 || exit 1" --health-interval=10s --health-timeout=5s --health-retries=5
@@ -25,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Start Playwright Test Container
+      - name: Build and run Playwright Test Container
         run: |
           docker run --rm \
             --network=host \
