@@ -2,7 +2,8 @@ name: Tests unit
 
 on:
   push:
-    branches: [main]
+    branches:
+      - '**'
   workflow_dispatch:
 
 jobs:
