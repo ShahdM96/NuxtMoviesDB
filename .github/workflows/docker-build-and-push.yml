@@ -1,0 +1,24 @@
+name: Build and Push Docker Image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout
+
+      - name: Build Docker Image
+        run: docker build -t my-app:v2
+
+      - name: Docker Tag
+        run: docker tag my-app:v2 shahdm96/nuxtmoviesdb:v2
+
+      - name: Docker Push
+        run:  docker push shahdm96/nuxtmoviesdb:v2
