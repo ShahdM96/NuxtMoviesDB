@@ -6,15 +6,15 @@ on:
       - '**' # Trigger this workflow on push to the main branch (you can adjust as needed)
 
 jobs:
-  job1:
+  test-e2e:
     uses: ./.github/workflows/tests-e2e.yml # Running the end-to-end tests workflow
 
-  job2:
+  test-unit:
     uses: ./.github/workflows/tests-unit.yml # Running the unit tests workflow
 
-  job3:
+  docker-build-and-push:
     runs-on: ubuntu-latest
-    needs: [job1, job2] # Ensure job3 runs only after both job1 and job2 complete successfully
+    needs: [test-e2e, test-unit] # Ensure job3 runs only after both job1 and job2 complete successfully
 
     steps:
       - name: Checkout repository
