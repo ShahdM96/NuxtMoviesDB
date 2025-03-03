@@ -1,9 +1,10 @@
 name: Tests e2e
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+  workflow_call:
+#    branches:
+#      - '**'
+#  workflow_dispatch:
 
 jobs:
   build:
