@@ -1,10 +1,10 @@
 name: Tests unit
 
 on:
-#  push:
-#    branches:
-#      - '**'
-  workflow_dispatch:
+  push:
+    branches:
+      - '**'
+#  workflow_dispatch:
 
 jobs:
   build:
