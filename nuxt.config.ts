@@ -6,10 +6,16 @@ const isDev = process.env.NODE_ENV === 'development'
 const apiBaseUrl = 'https://movies-proxy.vercel.app'
 
 export default defineNuxtConfig({
-  modules: ['@vueuse/nuxt', '@unocss/nuxt', '@nuxt/image', '@nuxtjs/i18n', '@nuxtjs/html-validator', '@nuxt/test-utils/module'],
+  modules: [
+    '@vueuse/nuxt',
+    '@unocss/nuxt',
+    '@nuxt/image',
+    '@nuxtjs/i18n',
+    '@nuxtjs/html-validator',
+  ],
 
   experimental: {
-    // inlineSSRStyles: false,
+    inlineSSRStyles: false,
     viewTransition: true,
     renderJsonPayloads: true,
   },
@@ -121,7 +127,11 @@ export default defineNuxtConfig({
     /** A list of routes to ignore (that is, not check validity for). */
     ignore: [/\.(xml|rss|json)$/],
     options: {
-      extends: ['html-validate:document', 'html-validate:recommended', 'html-validate:standard'],
+      extends: [
+        'html-validate:document',
+        'html-validate:recommended',
+        'html-validate:standard'
+      ],
       rules: {
         'svg-focusable': 'off',
         'no-unknown-elements': 'error',
@@ -133,10 +143,10 @@ export default defineNuxtConfig({
         'attribute-boolean-style': 'off',
         'doctype-style': 'off',
         // Unreasonable rule
-        'no-inline-style': 'off',
-      },
-    },
+        'no-inline-style': 'off'
+      }
+    }
   },
 
-  compatibilityDate: '2024-11-22',
+  compatibilityDate: '2025-03-03',
 })
