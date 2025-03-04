@@ -106,7 +106,7 @@ export default defineNuxtConfig({
       {
         code: 'ar',
         name: 'العربية',
-        file: 'ar.json'
+        file: 'ar.json',
       },
       {
         code: 'uk-UA',
