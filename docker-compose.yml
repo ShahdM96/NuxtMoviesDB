@@ -8,7 +8,7 @@ services:
       - app-network
 
   test:
-    image: apitest # Your test Docker image
+    image: shahdm96/dbtesting:v1 # Your test Docker image
     depends_on:
       - app # Ensure the app container starts first
     environment:
