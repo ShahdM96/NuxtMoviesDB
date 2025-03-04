@@ -102,11 +102,13 @@ export default defineNuxtConfig({
         code: 'fr-FR',
         name: 'Français',
         file: 'fr-FR.json',
-      },{
+      },
+      {
         code: 'ar',
         name: 'العربية',
         file: 'ar.json'
-      },{
+      },
+      {
         code: 'uk-UA',
         name: 'Українська',
         file: 'uk-UA.json',
