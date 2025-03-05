@@ -13,7 +13,7 @@ jobs:
         image: docker:19.03.12
         options: --privileged
         ports:
-          - 3000:3000  # Expose the port of the app for testing
+          - 3000:3000 # Expose the port of the app for testing
 
     steps:
       - name: Checkout code
