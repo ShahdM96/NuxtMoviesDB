@@ -3,21 +3,18 @@ name: Translate Missing Phrases
 on:
   push:
     paths:
-      - 'src/internationalization/en.json'  # Trigger when en.json is updated
-  workflow_run:
-    workflows: ["Tests unit"]
-    types:
-      - completed
+      - 'internationalization/en.json' # Trigger when en.json is updated
+
 jobs:
   translate:
-    runs-on: ubuntu-latest  # Use a Linux environment for the job
+    runs-on: ubuntu-latest # Use a Linux environment for the job
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2  # Checkout the code to the runner
+        uses: actions/checkout@v2 # Checkout the code to the runner
 
       - name: Set up Java
-        uses: actions/setup-java@v2  # Set up Java (to interact with your Java service)
+        uses: actions/setup-java@v2 # Set up Java (to interact with your Java service)
         with:
           java-version: '19'
 
@@ -67,6 +64,6 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add src/internationalization/*.json  # Add the updated language files
-          git commit -m "Update translations"  # Commit the changes
-          git push  # Push the updated files to the repository
+          git add src/internationalization/*.json # Add the updated language files
+          git commit -m "Update translations" # Commit the changes
+          git push # Push the updated files to the repository
