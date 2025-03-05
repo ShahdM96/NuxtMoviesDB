@@ -1,22 +1,22 @@
-version: '3'
-services:
-  app:
-    image: shahdm96/nuxtmoviesdb:fb81016abfebde9c066b571645d12cdecf89cd03 # Your app Docker image
-    ports:
-      - '3000:3000' # Exposing the app's port
-    networks:
-      - app-network
-
-  test:
-    image: shahdm96/dbtesting:v1 # Your test Docker image
-    depends_on:
-      - app # Ensure the app container starts first
-    environment:
-      - BASE_URL=http://localhost:3000/ # Set the base URL for UI tests to the app's container
-    networks:
-      - app-network
-    command: ['mvn','test'] # Command to run your tests in the test container
-
-networks:
-  app-network:
-    driver: bridge
+#version: '3'
+#services:
+#  app:
+#    image: shahdm96/nuxtmoviesdb:fb81016abfebde9c066b571645d12cdecf89cd03 # Your app Docker image
+#    ports:
+#      - '3000:3000' # Exposing the app's port
+#    networks:
+#      - app-network
+#
+#  test:
+#    image: shahdm96/dbtesting:v1 # Your test Docker image
+#    depends_on:
+#      - app # Ensure the app container starts first
+#    environment:
+#      - BASE_URL=http://localhost:3000/ # Set the base URL for UI tests to the app's container
+#    networks:
+#      - app-network
+#    command: ['mvn', 'test'] # Command to run your tests in the test container
+#
+#networks:
+#  app-network:
+#    driver: bridge
