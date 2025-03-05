@@ -16,8 +16,8 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v2  # Set up Java (to interact with your Java service)
         with:
-          distribution: 'microsoft'  # Use 'microsoft' distribution for Java
-          java-version: '17'  # Set Java version to 17
+          java-version: '17'  # Use Java 17
+          distribution: 'openjdk'  # Use OpenJDK distribution
 
       - name: Install dependencies
         run: |
@@ -33,7 +33,7 @@ jobs:
           missing_phrases=""
 
           # Check all other JSON files for missing phrases
-          for file in internationalization/*.json; do  # Correct the path to other JSON files
+          for file in internationalization/*.json; do
             if [[ "$file" != "internationalization/en.json" ]]; then
               for phrase in $en_phrases; do
                 # Check if phrase is missing in the current file
@@ -50,13 +50,16 @@ jobs:
         run: |
           # Iterate over each missing phrase and translate it
           for phrase in $missing_phrases; do
-            target_language="fr"  # You can adjust this for different languages (or get dynamically)
+            # Safely escape the phrase
+            escaped_phrase=$(echo "$phrase" | jq -R .)  # -R ensures safe string handling
           
-            # Call the Java translation service with text and target language
+            target_language="fr"  # Set the target language (you can adjust this dynamically)
+
+            # Call the Java translation service with the text and target language
             translation=$(curl -s -X POST -H "Content-Type: application/json" \
-              -d "{\"text\":\"$phrase\",\"targetLanguage\":\"$target_language\"}" \
-              https://552a-2a06-c701-706a-6700-61f0-5e41-a32d-fe22.ngrok-free.app/api/translate)
-          
+              -d "{\"text\":$escaped_phrase,\"targetLanguage\":\"$target_language\"}" \
+              https://1af6-2a06-c701-706a-6700-61f0-5e41-a32d-fe22.ngrok-free.app/api/translate)
+
             # Update the corresponding language files with the translated phrase
             jq ".\"$phrase\" = \"$translation\"" internationalization/*.json > temp.json && mv temp.json internationalization/*.json
           done
