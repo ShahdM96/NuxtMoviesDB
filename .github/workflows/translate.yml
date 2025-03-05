@@ -58,7 +58,7 @@ jobs:
             # Call the Java translation service with the text and target language
             translation=$(curl -s -X POST -H "Content-Type: application/json" \
               -d "{\"text\":$escaped_phrase,\"targetLanguage\":\"$target_language\"}" \
-              https://552a-2a06-c701-706a-6700-61f0-5e41-a32d-fe22.ngrok-free.app/api/translate)
+              https://1af6-2a06-c701-706a-6700-61f0-5e41-a32d-fe22.ngrok-free.app/api/translate)
 
             # Update the corresponding language files with the translated phrase
             jq ".\"$phrase\" = \"$translation\"" internationalization/*.json > temp.json && mv temp.json internationalization/*.json
