@@ -4,7 +4,6 @@ on:
   push:
     paths:
       - 'src/internationalization/en.json'  # Trigger when en.json is updated
-      - 'src/internationalization/*.json'   # Trigger when any language JSON is updated
 
 jobs:
   translate:
