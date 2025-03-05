@@ -1,5 +1,5 @@
-#version: '3'
-#services:
+# version: '3'
+# services:
 #  app:
 #    image: shahdm96/nuxtmoviesdb:fb81016abfebde9c066b571645d12cdecf89cd03 # Your app Docker image
 #    ports:
@@ -17,6 +17,6 @@
 #      - app-network
 #    command: ['mvn', 'test'] # Command to run your tests in the test container
 #
-#networks:
+# networks:
 #  app-network:
 #    driver: bridge
