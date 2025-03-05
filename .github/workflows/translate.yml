@@ -11,13 +11,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2 # Checkout the code to the runner
+        uses: actions/checkout@v2  # Checkout the code to the runner
 
       - name: Set up Java
         uses: actions/setup-java@v2  # Set up Java (to interact with your Java service)
         with:
+          distribution: 'microsoft'  # Use 'microsoft' distribution for Java
           java-version: '17'  # Set Java version to 17
-          distribution: 'openjdk'  # Use openjdk as the distribution
 
       - name: Install dependencies
         run: |
