@@ -16,8 +16,8 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v2  # Set up Java (to interact with your Java service)
         with:
-          java-version: '17'  # Use Java 17
-          distribution: 'openjdk'  # Use OpenJDK distribution
+          distribution: 'microsoft'  # Use 'microsoft' distribution for Java
+          java-version: '17'  # Set Java version to 17
 
       - name: Install dependencies
         run: |
@@ -58,7 +58,7 @@ jobs:
             # Call the Java translation service with the text and target language
             translation=$(curl -s -X POST -H "Content-Type: application/json" \
               -d "{\"text\":$escaped_phrase,\"targetLanguage\":\"$target_language\"}" \
-              https://1af6-2a06-c701-706a-6700-61f0-5e41-a32d-fe22.ngrok-free.app/api/translate)
+              https://552a-2a06-c701-706a-6700-61f0-5e41-a32d-fe22.ngrok-free.app/api/translate)
 
             # Update the corresponding language files with the translated phrase
             jq ".\"$phrase\" = \"$translation\"" internationalization/*.json > temp.json && mv temp.json internationalization/*.json
