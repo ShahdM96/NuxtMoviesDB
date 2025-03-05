@@ -3,20 +3,21 @@ name: Translate Missing Phrases
 on:
   push:
     paths:
-      - 'internationalization/en.json' # Trigger when en.json is updated
+      - 'internationalization/en.json'  # Trigger when en.json is updated
 
 jobs:
   translate:
-    runs-on: ubuntu-latest # Use a Linux environment for the job
+    runs-on: ubuntu-latest  # Use a Linux environment for the job
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2 # Checkout the code to the runner
+        uses: actions/checkout@v2  # Checkout the code to the runner
 
       - name: Set up Java
-        uses: actions/setup-java@v2 # Set up Java (to interact with your Java service)
+        uses: actions/setup-java@v2  # Set up Java (to interact with your Java service)
         with:
           java-version: '19'
+          distribution: 'adoptopenjdk'  # Specify the distribution (e.g., adoptopenjdk, zulu)
 
       - name: Install dependencies
         run: |
@@ -26,14 +27,14 @@ jobs:
         id: compare_translations
         run: |
           # Extract phrases from en.json
-          en_phrases=$(jq -r 'keys[]' src/internationalization/en.json)
+          en_phrases=$(jq -r 'keys[]' internationalization/en.json)
           
           # Initialize missing phrases variable
           missing_phrases=""
-          
+
           # Check all other JSON files for missing phrases
-          for file in src/internationalization/*.json; do
-            if [[ "$file" != "src/internationalization/en.json" ]]; then
+          for file in internationalization/*.json; do  # Correct the path to other JSON files
+            if [[ "$file" != "internationalization/en.json" ]]; then
               for phrase in $en_phrases; do
                 # Check if phrase is missing in the current file
                 if ! jq -e ".\"$phrase\"" $file &>/dev/null; then
@@ -57,13 +58,13 @@ jobs:
               https://552a-2a06-c701-706a-6700-61f0-5e41-a32d-fe22.ngrok-free.app/api/translate)
           
             # Update the corresponding language files with the translated phrase
-            jq ".\"$phrase\" = \"$translation\"" src/internationalization/*.json > temp.json && mv temp.json src/internationalization/*.json
+            jq ".\"$phrase\" = \"$translation\"" internationalization/*.json > temp.json && mv temp.json internationalization/*.json
           done
 
       - name: Commit and push updated translations
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add src/internationalization/*.json # Add the updated language files
-          git commit -m "Update translations" # Commit the changes
-          git push # Push the updated files to the repository
+          git add internationalization/*.json  # Add the updated language files
+          git commit -m "Update translations"  # Commit the changes
+          git push  # Push the updated files to the repository
