@@ -11,13 +11,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2  # Checkout the code to the runner
+        uses: actions/checkout@v2 # Checkout the code to the runner
 
       - name: Set up Java
-        uses: actions/setup-java@v2  # Set up Java (to interact with your Java service)
+        uses: actions/setup-java@v2 # Set up Java (to interact with your Java service)
         with:
           java-version: '19'
-          distribution: 'adoptopenjdk'  # Specify the distribution (e.g., adoptopenjdk, zulu)
+          distribution: 'adoptium' # Use 'adoptium' instead of 'adoptopenjdk'
 
       - name: Install dependencies
         run: |
