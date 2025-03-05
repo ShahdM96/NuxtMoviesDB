@@ -117,6 +117,7 @@ export default defineNuxtConfig({
     lazy: true,
     langDir: 'internationalization',
     defaultLocale: 'en',
+    fetchTranslation: (locale) => fetchTranslation(locale),
   },
 
   htmlValidator: {
@@ -145,3 +146,21 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-11-22',
 })
+
+// Define the fetchTranslation function
+async function fetchTranslation(locale: string) {
+  const apiUrl = `http://localhost:8080/api/translate?locale=${locale}`;
+
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch translations for ${locale}`);
+    }
+
+    const translations = await response.json();
+    return translations;
+  } catch (error) {
+    console.error('Error fetching translations:', error);
+    return {};  // Return an empty object or fallback translations in case of an error
+  }
+}
