@@ -4,7 +4,10 @@ on:
   push:
     paths:
       - 'src/internationalization/en.json'  # Trigger when en.json is updated
-
+  workflow_run:
+    workflows: ["Tests unit"]
+    types:
+      - completed
 jobs:
   translate:
     runs-on: ubuntu-latest  # Use a Linux environment for the job
